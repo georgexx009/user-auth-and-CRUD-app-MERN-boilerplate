@@ -1,7 +1,7 @@
 export const initialFormState = {
   firstName: '',
   lastName: '',
-  userName: '',
+  username: '',
   password: '',
 };
 

@@ -11,19 +11,20 @@ export const userRegistration = async data => {
   data['admin'] = false;
   const res = await axios({
     method: 'post',
-    url: `${urlServer}/registration/register`,
+    url: `${urlServer}/authentication/register`,
     data: JSON.stringify(data),
   });
   return res;
 };
 
 export const usernameValidation = async data => {
-  const res = await fetch(`${urlServer}/registration/validateUsername`, {
+  const res = await fetch(`${urlServer}/authentication/validateUsername`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
+  console.log(res.status);
   return res.status;
 };

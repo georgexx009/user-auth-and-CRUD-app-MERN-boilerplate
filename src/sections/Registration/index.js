@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './index.scss';
+
+// action creators
 import {
   updateUsernameHeader,
   setUserData,
   snackbarActions,
 } from '../../actions';
+
+// services
 import {
   userRegistration,
   usernameValidation,
@@ -18,7 +23,6 @@ import {
 } from './utils';
 import { automaticCloseSnackbar } from '../../componentsV2/UI/Snackbar/utils';
 import Button from '../../componentsV2/UI/button';
-import { useHistory } from 'react-router-dom';
 
 const Registration = () => {
   const history = useHistory();
@@ -42,7 +46,7 @@ const Registration = () => {
   const handleOnBlur = async e => {
     const { value } = e.target;
     const data = {
-      userName: value,
+      username: value,
     };
     const isUsernameTaken = await usernameValidation(data);
     if (isUsernameTaken === 204) {
@@ -71,7 +75,7 @@ const Registration = () => {
     console.log(registrationRes);
     if (registrationRes.status === 200) {
       console.log(registrationRes);
-      dispatch(updateUsernameHeader(registrationRes.data.user.userName));
+      dispatch(updateUsernameHeader(registrationRes.data.user.username));
       const fullUser = {
         ...registrationRes.data.user,
         token: registrationRes.data.token,
@@ -123,14 +127,14 @@ const Registration = () => {
 
               <p>User name</p>
               <input
-                name="userName"
+                name="username"
                 placeholder="user name ..."
                 className={`${
                   usernameAvailable === false
                     ? 'usernameTaken'
                     : usernameAvailable === true && 'usernameAvailable'
                 }`}
-                value={formState.userName}
+                value={formState.username}
                 onChange={onChange}
                 onBlur={handleOnBlur}
                 autoComplete="new-password"
