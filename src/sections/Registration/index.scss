@@ -1,0 +1,51 @@
+@import '../../constants/baseColors';
+@import '../../constants/styles/forms';
+@import '../../constants/styles/classes';
+
+.registration-section,
+.log-in-section {
+  color: white;
+  font-size: 0.9em;
+
+  .card-login {
+    width: 90%;
+    max-width: 496px;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: $surface;
+    margin: 20px auto;
+    border-radius: 10px;
+
+    header {
+      margin-bottom: 30px;
+      font-size: 1.7em;
+      display: flex;
+      justify-content: center;
+    }
+
+    .body {
+      margin-bottom: 30px;
+      input {
+        @extend %dark-inputs;
+
+        &.usernameTaken {
+          border-bottom: 1px solid $error;
+        }
+        &.usernameAvailable {
+          border-bottom: 1px solid $success;
+        }
+      }
+    }
+
+    .footer {
+      text-align: center;
+      button {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      a {
+        @extend %underline-link;
+      }
+    }
+  }
+}

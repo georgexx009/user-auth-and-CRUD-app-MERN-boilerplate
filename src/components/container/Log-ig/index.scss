@@ -1,0 +1,41 @@
+@import '../../general-styles/forms';
+@import '../../../../constants/baseColors';
+
+div.registration,
+div.log-in {
+  color: white;
+  font-size: 0.9em;
+
+  .card-login {
+    width: 90%;
+    max-width: 496px;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: $surface;
+    margin: 20px auto;
+
+    header {
+      margin-bottom: 30px;
+      font-size: 1.7em;
+      display: flex;
+      justify-content: center;
+    }
+
+    .body {
+      margin-bottom: 30px;
+      input {
+        @extend %dark-inputs;
+
+        &.userNameTaken {
+          border-bottom: 1px solid $error;
+        }
+      }
+    }
+
+    .footer {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

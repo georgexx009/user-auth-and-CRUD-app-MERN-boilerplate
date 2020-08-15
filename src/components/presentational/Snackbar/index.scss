@@ -1,0 +1,60 @@
+@import "../../../constants/baseColors";
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+div.snackbar {
+  position: fixed;
+  width: 100%;
+  top: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+
+  .snackbar-box {
+    padding: 8px 30px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-right: 20px;
+    }
+
+    i {
+      cursor: pointer;
+    }
+  }
+}
+
+.default {
+  background-color: $primary;
+}
+
+.error {
+  background-color: $error;
+}
+
+.success {
+  background-color: $success;
+}

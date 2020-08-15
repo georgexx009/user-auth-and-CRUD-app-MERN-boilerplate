@@ -1,0 +1,29 @@
+@import '../../../constants/baseColors';
+
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  bottom: 40px;
+  right: 40px;
+  background-color: $primaryBtn;
+  color: $onPrimary;
+  border-radius: 50px;
+  text-align: center;
+  transition: background-color 1s ease;
+
+  &:hover {
+    background-color: $primaryBtnHover;
+  }
+}
+
+.my-float {
+  margin-top: 22px;
+}
+
+@media only screen and (max-width: 1160px) {
+  div.posts-interface + .float {
+    display: none;
+  }
+}

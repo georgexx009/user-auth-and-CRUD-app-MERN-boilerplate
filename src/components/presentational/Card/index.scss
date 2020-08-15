@@ -1,0 +1,37 @@
+@import '../../../../constants/baseColors';
+
+.card {
+  background-color: $surface;
+  color: $onSurface;
+  width: 80%;
+
+  padding: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    //border: 1px red solid;
+    padding-bottom: 5%;
+  }
+
+  .content {
+    padding-bottom: 5%;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin: auto 10px;
+    }
+  }
+}
+
+@media only screen and (min-width: 970px) {
+  .card {
+    width: 400px;
+    padding: 40px;
+  }
+}

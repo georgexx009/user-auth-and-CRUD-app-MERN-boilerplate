@@ -1,0 +1,12 @@
+#app {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+}
+
+// @media only screen and (min-width: 1300px) {
+//   #app {
+//     grid-template-columns: 0.1fr 0.8fr 0.1fr;
+//   }
+// }

@@ -1,0 +1,44 @@
+@import '../../../constants/styles/baseColors';
+@import '../../../constants/styles/forms';
+
+div.new-pub-form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  padding: 30px;
+  margin-bottom: 15px;
+  background-color: $surface;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  input,
+  textarea {
+    @extend %dark-inputs;
+    font-size: 0.8em;
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    padding: 10px;
+    &:focus {
+      border: 1px solid $primary;
+    }
+  }
+
+  input.username-input {
+    width: 50%;
+  }
+
+  textarea {
+    border: 1px solid grey;
+  }
+
+  div.footer-btns {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin: auto 10px;
+    }
+  }
+}

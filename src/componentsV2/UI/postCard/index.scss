@@ -1,0 +1,41 @@
+@import '../../../constants/styles/avatar';
+@import '../../../constants/styles/baseColors';
+
+div.pub-card {
+  background-color: $surface;
+  padding: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+
+  .post-container {
+    display: flex;
+    align-items: center;
+    div.avatar {
+      background-image: url('https://res.cloudinary.com/dtwkxgaag/image/upload/v1594148931/assets/Uchiha_Sasuke_lhbu4g.jpg');
+      background-repeat: no-repeat; /* by default images repeat */
+      background-position: center;
+      background-size: cover;
+    }
+
+    .post-content {
+      padding-left: 20px;
+      padding-right: 15px;
+      .username {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+      }
+      .content {
+        font-size: 0.7em;
+      }
+    }
+
+    .grp-options {
+      display: flex;
+      justify-self: flex-end;
+      margin-left: auto;
+      margin-top: auto;
+    }
+  }
+}

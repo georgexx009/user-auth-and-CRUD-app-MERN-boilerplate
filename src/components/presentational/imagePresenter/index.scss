@@ -1,0 +1,11 @@
+.image-presenter {
+  // width: 480px;
+  // height: 300px;
+  overflow: hidden;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}

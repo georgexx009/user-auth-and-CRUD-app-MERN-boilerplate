@@ -1,0 +1,20 @@
+.my-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .about-notes-section {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+  }
+
+  .break-line {
+    background-color: grey;
+    height: 1px;
+    width: 80%;
+    max-width: 900px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+}

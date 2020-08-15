@@ -1,0 +1,19 @@
+@import "../../constants/baseColors";
+
+%dark-inputs {
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1em;
+  color: white;
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid grey;
+  outline: none;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  box-sizing: border-box;
+
+  &:focus {
+    border-bottom: 1px solid $primary;
+  }
+}
