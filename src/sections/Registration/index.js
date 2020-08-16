@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './index.scss';
 
+// custom hooks
+import { useStateForm } from '../../hooks';
+
 // action creators
 import {
   updateUsernameHeader,
@@ -27,7 +30,7 @@ import Button from '../../componentsV2/UI/button';
 const Registration = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState(initialFormState);
+  //const [formState, setFormState] = useState(initialFormState);
   const [usernameAvailable, setUsernameAvailable] = useState();
   const [snackbarInfo, setSnackbarInfo] = useState({
     show: false,
@@ -35,13 +38,15 @@ const Registration = () => {
     label: '',
   });
 
-  const onChange = event => {
-    const { name, value } = event.target;
-    setFormState(formState => ({
-      ...formState,
-      [name]: value,
-    }));
-  };
+  const { formState, onChange, resetForm } = useStateForm(initialFormState);
+
+  // const onChange = event => {
+  //   const { name, value } = event.target;
+  //   setFormState(formState => ({
+  //     ...formState,
+  //     [name]: value,
+  //   }));
+  // };
 
   const handleOnBlur = async e => {
     const { value } = e.target;
@@ -82,7 +87,7 @@ const Registration = () => {
       };
       localStorage.setItem('user', JSON.stringify(fullUser));
       dispatch(setUserData(fullUser));
-      setFormState(initialFormState);
+      resetForm();
       dispatch(
         snackbarActions.setAllData(...Object.values(snackbarInfoSuccess))
       );
@@ -100,70 +105,64 @@ const Registration = () => {
   };
 
   return (
-    <>
-      <section className="registration-section">
-        <div className="card-login">
-          <header>
-            <p>Registration</p>
-          </header>
+    <section className="registration-section">
+      <div className="card-login">
+        <header>
+          <p>Registration</p>
+        </header>
 
-          <form onSubmit={onSubmit}>
-            <div className="body">
-              <input type="hidden" value="password" />
-              <p>First name:</p>
-              <input
-                name="firstName"
-                placeholder="first name ..."
-                value={formState.firstName}
-                onChange={onChange}
-              />
-              <p>Last name:</p>
-              <input
-                name="lastName"
-                placeholder="last name ..."
-                value={formState.lastName}
-                onChange={onChange}
-              />
+        <form onSubmit={onSubmit}>
+          <div className="body">
+            <input type="hidden" value="password" />
+            <p>First name:</p>
+            <input
+              name="firstName"
+              placeholder="first name ..."
+              value={formState.firstName}
+              onChange={onChange}
+            />
+            <p>Last name:</p>
+            <input
+              name="lastName"
+              placeholder="last name ..."
+              value={formState.lastName}
+              onChange={onChange}
+            />
 
-              <p>User name</p>
-              <input
-                name="username"
-                placeholder="user name ..."
-                className={`${
-                  usernameAvailable === false
-                    ? 'usernameTaken'
-                    : usernameAvailable === true && 'usernameAvailable'
-                }`}
-                value={formState.username}
-                onChange={onChange}
-                onBlur={handleOnBlur}
-                autoComplete="new-password"
-              />
+            <p>User name</p>
+            <input
+              name="username"
+              placeholder="user name ..."
+              className={`${
+                usernameAvailable === false
+                  ? 'usernameTaken'
+                  : usernameAvailable === true && 'usernameAvailable'
+              }`}
+              value={formState.username}
+              onChange={onChange}
+              onBlur={handleOnBlur}
+              autoComplete="new-password"
+            />
 
-              <p>Password</p>
-              <input
-                name="password"
-                type="password"
-                placeholder="password ..."
-                value={formState.password}
-                onChange={onChange}
-                autoComplete="new-password"
-              />
-            </div>
-            <div className="footer">
-              <Button
-                lbl="Register"
-                type="submit"
-                disabled={snackbarInfo.show}
-              />
-              <a onClick={() => history.push('/login')}>
-                Already have an account?
-              </a>
-            </div>
-          </form>
-        </div>
-      </section>
-    </>
+            <p>Password</p>
+            <input
+              name="password"
+              type="password"
+              placeholder="password ..."
+              value={formState.password}
+              onChange={onChange}
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="footer">
+            <Button lbl="Register" type="submit" disabled={snackbarInfo.show} />
+            <a onClick={() => history.push('/login')}>
+              Already have an account?
+            </a>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

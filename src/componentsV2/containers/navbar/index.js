@@ -66,10 +66,6 @@ const Navbar = () => {
           </Link>
         )}
 
-        <Link to="/cards">
-          <i className="fas fa-code"></i> Naruto Cards
-        </Link>
-
         <Link to="/MyNotes">Notes</Link>
 
         {username === 'not logged' && <Link to="/registration">Register</Link>}

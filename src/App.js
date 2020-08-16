@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-import MainCardContainer from './components/container/mainCardContainer/index';
 import UserProfile from './componentsV2/containers/userProfile';
 import TestingContainer from './components/container/testingContainer';
 import Navbar from './componentsV2/containers/navbar';
@@ -23,9 +22,6 @@ class App extends Component {
           <Switch>
             <Route path="/user-profile">
               <UserProfile />
-            </Route>
-            <Route path="/cards">
-              <MainCardContainer />
             </Route>
             <Route path="/testing">
               <TestingContainer />
