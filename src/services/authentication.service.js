@@ -28,3 +28,13 @@ export const usernameValidation = async data => {
 
   return res.status;
 };
+
+export const userLogin = async data => {
+  const res = await axios({
+    method: 'post',
+    url: `${urlServer}/registration/login`,
+    data: JSON.stringify(data),
+  });
+  console.log(res);
+  return res;
+};

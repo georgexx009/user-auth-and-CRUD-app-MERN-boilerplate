@@ -13,33 +13,28 @@ import { setUserData } from '../../actions';
 
 import Button from '../../componentsV2/UI/button';
 
+// custom hooks
+import { useStateForm, useLogin, useSnackbar } from '../../hooks';
+
 const LogIn = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const [formState, setFormState] = useState(initFormState);
+  const { displaySnackbar, hideSnackbar } = useSnackbar();
 
-  const onChange = event => {
-    const { name, value } = event.target;
-    setFormState(prevFormState => ({
-      ...prevFormState,
-      [name]: value,
-    }));
-  };
+  // form state manager
+  const { formState, onChange, resetForm } = useStateForm(initFormState);
 
-  const onSubmit = async e => {
-    e.preventDefault();
-    const res = await loginService({ ...formState });
-    if (res.status === 200) {
-      setFormState(initFormState);
-      displaySnackbar(successLoginSnackbar, dispatch);
-      const fullUserInfo = { ...res.data.user, token: res.data.token };
-      localStorage.setItem('user', JSON.stringify(fullUserInfo));
-      dispatch(setUserData(fullUserInfo));
+  // manage submit
+  const { onSubmit } = useLogin(
+    formState,
+    () => {
+      resetForm();
+      displaySnackbar('success', 'Welcome!');
       history.push('/');
-    } else {
-      displaySnackbar(errorLoginSnackbar, dispatch);
+    },
+    () => {
+      displaySnackbar('error', 'Please verify the credentials');
     }
-  };
+  );
 
   return (
     <section className="log-in-section">
