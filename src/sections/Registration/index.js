@@ -1,108 +1,52 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './index.scss';
 
 // custom hooks
-import { useStateForm } from '../../hooks';
-
-// action creators
 import {
-  updateUsernameHeader,
-  setUserData,
-  snackbarActions,
-} from '../../actions';
-
-// services
-import {
-  userRegistration,
-  usernameValidation,
-} from '../../services/register/registrationService';
-import {
-  snackbarInfoError,
-  snackbarInfoSuccess,
-  snackbarInfoUserTaken,
-  initialFormState,
-} from './utils';
-import { automaticCloseSnackbar } from '../../componentsV2/UI/Snackbar/utils';
+  useStateForm,
+  useSnackbar,
+  useValidateUsername,
+  useRegistration,
+} from '../../hooks';
 import Button from '../../componentsV2/UI/button';
 
-const Registration = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  //const [formState, setFormState] = useState(initialFormState);
-  const [usernameAvailable, setUsernameAvailable] = useState();
-  const [snackbarInfo, setSnackbarInfo] = useState({
-    show: false,
-    type: 'default',
-    label: '',
-  });
+const initialFormState = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  password: '',
+};
 
+const Registration = () => {
+  const history = useHistory(); // hook for manage react router
+
+  // hook for manage form state
   const { formState, onChange, resetForm } = useStateForm(initialFormState);
 
-  // const onChange = event => {
-  //   const { name, value } = event.target;
-  //   setFormState(formState => ({
-  //     ...formState,
-  //     [name]: value,
-  //   }));
-  // };
+  // display func parameters: type snackbar and label
+  const { displaySnackbar, hideSnackbar } = useSnackbar();
 
-  const handleOnBlur = async e => {
-    const { value } = e.target;
-    const data = {
-      username: value,
-    };
-    const isUsernameTaken = await usernameValidation(data);
-    if (isUsernameTaken === 204) {
-      setSnackbarInfo(snackbarInfoUserTaken);
-      dispatch(
-        snackbarActions.setAllData(...Object.values(snackbarInfoUserTaken))
-      );
-      setTimeout(() => {
-        dispatch(snackbarActions.setShow(false));
-      }, 2000);
+  // hook paramaters: handleUsernameAvailable, handleUsernameTaken
+  const {
+    handleValidateUsername, // func to trigger the validation
+    statusUsernameAvailable, // return current status of validation
+  } = useValidateUsername(hideSnackbar, () => {
+    displaySnackbar('error', 'User name already taken!');
+  });
 
-      setUsernameAvailable(false);
-    } else {
-      setUsernameAvailable(true);
-      setSnackbarInfo({
-        show: false,
-        type: 'default',
-        label: '',
-      });
-    }
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    const registrationRes = await userRegistration(formState);
-    console.log(registrationRes);
-    if (registrationRes.status === 200) {
-      console.log(registrationRes);
-      dispatch(updateUsernameHeader(registrationRes.data.user.username));
-      const fullUser = {
-        ...registrationRes.data.user,
-        token: registrationRes.data.token,
-      };
-      localStorage.setItem('user', JSON.stringify(fullUser));
-      dispatch(setUserData(fullUser));
+  // formState, handleSuccess, handleRailure
+  const { onSubmit } = useRegistration(
+    formState, // this is a reference type
+    () => {
       resetForm();
-      dispatch(
-        snackbarActions.setAllData(...Object.values(snackbarInfoSuccess))
-      );
-      setTimeout(() => {
-        dispatch(snackbarActions.setShow(false));
-      }, 2000);
-      history.push('/');
-    } else {
-      setSnackbarInfo(snackbarInfoError);
-      dispatch(snackbarActions.setAllData(...Object.values(snackbarInfoError)));
-      setTimeout(() => {
-        dispatch(snackbarActions.setShow(false));
-      }, 2000);
+      displaySnackbar('success', 'User registered successfully!');
+      history.push('/'); // move to main page
+    },
+    () => {
+      displaySnackbar('error', 'Error in registration :(');
     }
-  };
+  );
 
   return (
     <section className="registration-section">
@@ -129,18 +73,18 @@ const Registration = () => {
               onChange={onChange}
             />
 
-            <p>User name</p>
+            <p>Username</p>
             <input
               name="username"
               placeholder="user name ..."
               className={`${
-                usernameAvailable === false
+                statusUsernameAvailable === false
                   ? 'usernameTaken'
-                  : usernameAvailable === true && 'usernameAvailable'
+                  : statusUsernameAvailable === true && 'usernameAvailable'
               }`}
               value={formState.username}
               onChange={onChange}
-              onBlur={handleOnBlur}
+              onBlur={handleValidateUsername}
               autoComplete="new-password"
             />
 
@@ -155,7 +99,7 @@ const Registration = () => {
             />
           </div>
           <div className="footer">
-            <Button lbl="Register" type="submit" disabled={snackbarInfo.show} />
+            <Button lbl="Register" type="submit" />
             <a onClick={() => history.push('/login')}>
               Already have an account?
             </a>
