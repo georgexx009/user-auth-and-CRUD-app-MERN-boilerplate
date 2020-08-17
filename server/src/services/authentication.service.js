@@ -1,6 +1,13 @@
 const bcrypt = require('bcryptjs');
 const UserModel = require('../database/models/user.model');
 
+/*
+  the services structure
+  verify parameter
+  try catch where user model fetch data from database using mongoose
+  return the document that the model provided
+*/
+
 const registerNewUserService = async newUserData => {
   // verify provided user data
   if (!newUserData) {

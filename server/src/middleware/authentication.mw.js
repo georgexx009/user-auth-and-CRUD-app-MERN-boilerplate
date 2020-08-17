@@ -4,7 +4,17 @@ const {
   loginUserService,
   validateUserPassword,
 } = require('../services/authentication.service');
+
+// generate a session token with JWT
 const generateAuthToken = require('../utils/generateAuthToken');
+
+/*
+  the mw functions structure
+  wait for the service to fetch the info from database
+  delete the password from user object, to not return it back
+  add the token to the answer
+  with this token user could make operations that required authentication
+*/
 
 const register = async (req, res, next) => {
   const newUser = await registerNewUserService(req.body);
@@ -16,7 +26,6 @@ const register = async (req, res, next) => {
       user: newUser,
       token: generateAuthToken(newUser._id),
     };
-    console.log(bodyRes);
     res.send(bodyRes);
   }
 };

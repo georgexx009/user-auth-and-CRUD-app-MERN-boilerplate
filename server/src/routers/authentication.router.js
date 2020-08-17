@@ -8,6 +8,7 @@ const {
   login,
 } = require('../middleware/authentication.mw');
 
+// endpoints
 router.post('/register', register);
 router.post('/validateUsername', validateUsername);
 router.post('/login', login);
