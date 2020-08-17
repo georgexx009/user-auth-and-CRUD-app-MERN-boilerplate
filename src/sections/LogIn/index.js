@@ -8,7 +8,6 @@ import {
   errorLoginSnackbar,
 } from '../../componentsV2/UI/Snackbar/snackbar.types';
 import { displaySnackbar } from '../../componentsV2/UI/Snackbar/utils';
-import { initFormState } from './utils';
 import { setUserData } from '../../actions';
 
 import Button from '../../componentsV2/UI/button';
@@ -16,12 +15,17 @@ import Button from '../../componentsV2/UI/button';
 // custom hooks
 import { useStateForm, useLogin, useSnackbar } from '../../hooks';
 
+const initialFormState = {
+  username: '',
+  password: '',
+};
+
 const LogIn = () => {
   const history = useHistory();
   const { displaySnackbar, hideSnackbar } = useSnackbar();
 
   // form state manager
-  const { formState, onChange, resetForm } = useStateForm(initFormState);
+  const { formState, onChange, resetForm } = useStateForm(initialFormState);
 
   // manage submit
   const { onSubmit } = useLogin(
@@ -48,9 +52,9 @@ const LogIn = () => {
             <input type="hidden" value="password" />
             <p>User name</p>
             <input
-              name="userName"
+              name="username"
               placeholder="user name ..."
-              value={formState.userName}
+              value={formState.username}
               onChange={onChange}
             />
             <p>Password</p>

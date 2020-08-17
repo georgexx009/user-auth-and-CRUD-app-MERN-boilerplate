@@ -1,9 +1,10 @@
+const bcrypt = require('bcryptjs');
 const UserModel = require('../database/models/user.model');
 
 const registerNewUserService = async newUserData => {
   // verify provided user data
   if (!newUserData) {
-    throw new Error('new user information missing');
+    throw new Error('new user data missing');
   }
   let newUserDoc;
   try {
@@ -18,7 +19,6 @@ const registerNewUserService = async newUserData => {
 };
 
 const validateUsernameService = async username => {
-  console.log(username);
   let usernameDoc;
   try {
     usernameDoc = await UserModel.findOne({ username });
@@ -35,4 +35,29 @@ const validateUsernameService = async username => {
   }
 };
 
-module.exports = { registerNewUserService, validateUsernameService };
+const loginUserService = async userData => {
+  // verify provided user data
+  if (!userData) {
+    throw new Error('user data missing');
+  }
+  let userDoc;
+  try {
+    userDoc = await UserModel.findOne({ username: userData.username });
+  } catch (err) {
+    console.log('An error ocurred while logging user:');
+    console.log(err.message);
+    return null;
+  }
+  return userDoc;
+};
+
+const validateUserPassword = async (returnedPassword, reqPassword) => {
+  return await bcrypt.compare(reqPassword, returnedPassword);
+};
+
+module.exports = {
+  registerNewUserService,
+  validateUsernameService,
+  loginUserService,
+  validateUserPassword,
+};
