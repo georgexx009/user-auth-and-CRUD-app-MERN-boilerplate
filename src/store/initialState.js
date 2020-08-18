@@ -34,7 +34,7 @@ export const initialState = {
   userInfo: {
     firstName: '',
     lastName: '',
-    userName: 'not logged',
+    username: 'not logged',
     token: '',
     admin: false,
   },

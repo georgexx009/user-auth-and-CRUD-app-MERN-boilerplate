@@ -1,88 +1,98 @@
 @import '../../../constants/baseColors';
 @import '../../../constants/styles/classes';
 
-.navbar {
-  grid-column: 1 / 4;
-  padding: 10px;
+#navbar {
   display: flex;
   align-items: center;
+  padding: 10px;
 
-  #show-post-form-btn {
+  .hamburguer-btn {
+    font-size: 40px;
+    cursor: pointer;
+  }
+
+  .show-post-form-btn {
     margin-left: auto;
     margin-right: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.5s ease;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.39);
+    }
   }
 
   a {
     text-decoration: none;
-    color: $onPrimary;
-    @extend %underline-link;
-    span.span-title-mobile {
-      margin-left: 30px;
+    cursor: pointer;
+    .username-mobile {
+      margin-left: 20px;
     }
   }
 
   .sidenav {
+    // external position
     height: 100%;
     width: 0;
     position: fixed;
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: #111;
+
+    // hide when is not open
     overflow-x: hidden;
-    padding-top: 60px;
     transition: 0.5s;
 
-    .span-title-desktop {
+    // internal
+    background-color: #111;
+    padding-top: 60px;
+
+    // username on desktop view
+    .span-username-desktop {
       display: none;
     }
-  }
 
-  .sidenav a {
-    text-decoration: none;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+    a {
+      color: #818181;
+      display: block;
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      transition: 0.3s; // hover
+      i {
+        margin: auto 5px;
+      }
 
-    i {
-      margin: auto 5px;
+      &:hover {
+        color: #f1f1f1;
+      }
     }
-  }
 
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
   }
 }
 
 @media only screen and (min-width: 1160px) {
-  .navbar {
+  #navbar {
     padding: 0;
     margin: 15px 20px;
-
-    .show-post-form-btn {
-      display: none;
-    }
+    border-radius: 10px;
 
     .sidenav {
       background-color: $surface;
-      min-width: 100%;
+      min-width: 100%; // avoid the collapse from mobie view
       display: flex;
       height: auto;
       position: relative;
       padding: 0;
-      transition: 0s;
-
       box-sizing: border-box;
 
       a {
@@ -91,13 +101,14 @@
         margin: 0;
       }
 
-      span.span-title-desktop {
+      .span-username-desktop {
         display: inline;
       }
     }
 
+    .show-post-form-btn,
     .hamburguer-btn,
-    .sidenav .closebtn,
+    .sidenav .close-btn,
     .span-title-mobile {
       display: none;
     }

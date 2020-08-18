@@ -11,9 +11,11 @@ import { showPostForm, postSectionVisible } from '../../../actions';
 
 const PostInterface = ({ postsInfo }) => {
   const dispatch = useDispatch();
+  // status for display the modal - post form to submit new post
   const statusPostForm = useSelector(state => state.posts.showPostForm);
   const username = useSelector(state => state.userInfo.userName);
 
+  // update redux store bool, for let know other components that we are in posts section
   useEffect(() => {
     dispatch(postSectionVisible(true));
     return () => dispatch(postSectionVisible(false));

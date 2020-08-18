@@ -4,6 +4,7 @@ import './index.scss';
 
 import App from './App';
 
+// redux
 import { Provider } from 'react-redux';
 import { store } from './store';
 

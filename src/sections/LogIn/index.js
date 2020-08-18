@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
-import { loginService } from '../../services/register/loginService';
-import {
-  successLoginSnackbar,
-  errorLoginSnackbar,
-} from '../../componentsV2/UI/Snackbar/snackbar.types';
-import { displaySnackbar } from '../../componentsV2/UI/Snackbar/utils';
-import { setUserData } from '../../actions';
 
 import Button from '../../componentsV2/UI/button';
 
