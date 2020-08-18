@@ -3,6 +3,7 @@ const app = express();
 const setHeaders = require('./utils/setHeaders');
 const bodyParser = require('./utils/bodyParser');
 const authenticationRouter = require('./routers/authentication.router');
+const postsRouter = require('./routers/posts.router');
 
 // set headers to avoid CORS Policy
 app.use(setHeaders);
@@ -16,5 +17,6 @@ app.get('/publications', (req, res) => {
 
 //setting routers
 app.use('/authentication', authenticationRouter);
+app.use('/posts', postsRouter);
 
 module.exports = app;

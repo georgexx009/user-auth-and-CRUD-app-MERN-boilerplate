@@ -49,7 +49,7 @@ const Navbar = () => {
         ) : (
           <>
             <Link to="/user-profile">
-              <span className="span-username-desktop">{username}</span>
+              <span className="username-desktop">{username}</span>
             </Link>
 
             <Link to="/MyPublications">

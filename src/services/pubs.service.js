@@ -10,7 +10,7 @@ export async function retrieveAllPosts() {
     //     accept: 'application/json',
     //   },
     // });
-    const res = await axios.get(`${urlServer}/publications`, {
+    const res = await axios.get(`${urlServer}/posts`, {
       headers: {
         accept: 'application/json',
       },
@@ -28,7 +28,7 @@ export async function retriveProfilePosts() {
   const { publications, token } = JSON.parse(localStorage.getItem('user'));
   try {
     const res = await axios({
-      url: `${urlServer}/publications/profilePosts`,
+      url: `${urlServer}/posts/userPosts`,
       method: 'post',
       headers: {
         'Content-type': 'application/json',
@@ -52,7 +52,7 @@ export async function savePub(newPub) {
 
   try {
     const res = await axios({
-      url: `${urlServer}/publications/savePub`,
+      url: `${urlServer}/posts/savePost`,
       method: 'post',
       headers: {
         'Content-type': 'application/json',
@@ -74,7 +74,7 @@ export async function deletePost(postId) {
 
   try {
     const res = await axios({
-      url: `${urlServer}/publications/${postId}`,
+      url: `${urlServer}/posts/${postId}`,
       method: 'delete',
       headers: {
         'Content-type': 'application/json',

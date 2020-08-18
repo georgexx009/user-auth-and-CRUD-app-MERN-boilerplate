@@ -16,7 +16,7 @@ const NewPostForm = ({ handleCloseBtn }) => {
 
   const handleSaveBtn = async () => {
     const newPub = {
-      username: userInfo.userName,
+      username: userInfo.username,
       content: pubData,
     };
     const docSaved = await savePub(newPub);

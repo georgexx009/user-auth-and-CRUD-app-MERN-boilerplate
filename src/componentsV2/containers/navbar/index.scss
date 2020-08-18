@@ -50,7 +50,7 @@
     padding-top: 60px;
 
     // username on desktop view
-    .span-username-desktop {
+    .username-desktop {
       display: none;
     }
 
@@ -101,7 +101,7 @@
         margin: 0;
       }
 
-      .span-username-desktop {
+      .username-desktop {
         display: inline;
       }
     }
@@ -109,7 +109,7 @@
     .show-post-form-btn,
     .hamburguer-btn,
     .sidenav .close-btn,
-    .span-title-mobile {
+    .username-mobile {
       display: none;
     }
   }
