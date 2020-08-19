@@ -1,38 +1,25 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import './index.scss';
 import Button from '../../UI/button';
-import { savePost, updateUserPosts } from '../../../services';
-import { setUserPubs, setNewPub, addNewPost } from '../../../actions';
+import { showPostForm } from '../../../actions';
 import { useStateForm } from '../../../hooks';
+import { useCreatePost } from './useCreatePost';
 
-const NewPostForm = ({ handleCloseBtn }) => {
-  const [pubData, setPubData] = useState('');
+const NewPostForm = () => {
   const { formState, onChange, resetForm } = useStateForm({ post: '' });
-  const userInfo = useSelector(state => state.userInfo);
+
+  // close form from inside form
   const dispatch = useDispatch();
-
-  const handleSaveBtn = async () => {
-    const newPost = {
-      username: userInfo.username,
-      content: formState.post,
-    };
-    const docSaved = await savePost(newPost);
-    console.log(docSaved);
-    let newPubs = {
-      posts: [...userInfo.posts, docSaved._id],
-    };
-    const { status, data } = await updateUserPosts(newPubs);
-    console.log(data);
-    if (status === 200) {
-      //SEND PUBS FOR USER AND THE ADDED POST
-      dispatch(setUserPubs(data.publications));
-      dispatch(addNewPost(docSaved));
-    }
-
-    setPubData('');
-    handleCloseBtn();
+  const handleCloseBtn = () => {
+    dispatch(showPostForm(false));
   };
+
+  // hook for create post
+  const { createPost } = useCreatePost(formState, () => {
+    resetForm();
+    handleCloseBtn();
+  });
 
   return (
     <div className="new-pub-form">
@@ -45,7 +32,7 @@ const NewPostForm = ({ handleCloseBtn }) => {
         />
         <Button
           lbl="Save"
-          handleClick={handleSaveBtn}
+          handleClick={createPost}
           disabled={formState.post.trim() === ''}
         />
       </div>

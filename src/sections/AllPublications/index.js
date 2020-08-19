@@ -7,7 +7,7 @@ const AllPublications = () => {
 
   return (
     <>
-      <PostInterface postsInfo={postsList} />
+      <PostInterface postsList={postsList} />
     </>
   );
 };

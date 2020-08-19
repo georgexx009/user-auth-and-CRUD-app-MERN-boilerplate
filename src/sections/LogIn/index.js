@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../../componentsV2/UI/button';
@@ -13,7 +13,7 @@ const initialFormState = {
 
 const LogIn = () => {
   const history = useHistory();
-  const { displaySnackbar, hideSnackbar } = useSnackbar();
+  const { displaySnackbar } = useSnackbar();
 
   // form state manager
   const { formState, onChange, resetForm } = useStateForm(initialFormState);
