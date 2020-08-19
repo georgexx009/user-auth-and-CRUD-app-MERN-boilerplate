@@ -2,29 +2,27 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './index.scss';
 import Button from '../../UI/button';
-import { savePub, updateUserPubs } from '../../../services';
+import { savePost, updateUserPosts } from '../../../services';
 import { setUserPubs, setNewPub, addNewPost } from '../../../actions';
+import { useStateForm } from '../../../hooks';
 
 const NewPostForm = ({ handleCloseBtn }) => {
   const [pubData, setPubData] = useState('');
+  const { formState, onChange, resetForm } = useStateForm({ post: '' });
   const userInfo = useSelector(state => state.userInfo);
   const dispatch = useDispatch();
 
-  const handleChange = e => {
-    setPubData(e.target.value);
-  };
-
   const handleSaveBtn = async () => {
-    const newPub = {
+    const newPost = {
       username: userInfo.username,
-      content: pubData,
+      content: formState.post,
     };
-    const docSaved = await savePub(newPub);
-
+    const docSaved = await savePost(newPost);
+    console.log(docSaved);
     let newPubs = {
-      publications: [...userInfo.publications, docSaved._id],
+      posts: [...userInfo.posts, docSaved._id],
     };
-    const { status, data } = await updateUserPubs(newPubs);
+    const { status, data } = await updateUserPosts(newPubs);
     console.log(data);
     if (status === 200) {
       //SEND PUBS FOR USER AND THE ADDED POST
@@ -38,7 +36,7 @@ const NewPostForm = ({ handleCloseBtn }) => {
 
   return (
     <div className="new-pub-form">
-      <textarea placeholder="publication ..." onChange={handleChange} />
+      <textarea placeholder="post ..." name="post" onChange={onChange} />
       <div className="footer-btns">
         <Button
           lbl="Close"
@@ -48,7 +46,7 @@ const NewPostForm = ({ handleCloseBtn }) => {
         <Button
           lbl="Save"
           handleClick={handleSaveBtn}
-          disabled={pubData.trim() === ''}
+          disabled={formState.post.trim() === ''}
         />
       </div>
     </div>

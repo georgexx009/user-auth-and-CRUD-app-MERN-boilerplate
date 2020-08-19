@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './index.scss';
 
-import FloatingBtn from '../../../componentsV2/UI/floatingBtn/index2';
-import NewPostForm from '../../../componentsV2/containers/newPostForm';
-import AnimateContainer from '../../../componentsV2/containers/AnimateContainer';
-import PostList from '../../../componentsV2/containers/postsList';
+import FloatingBtn from '../../UI/floatingBtn/index2';
+import NewPostForm from '../NewPostForm';
+import AnimateContainer from '../AnimateContainer';
+import PostList from '../postsList';
 
 import { showPostForm } from '../../../actions';
 

@@ -19,7 +19,8 @@ export async function retrieveAllPosts() {
 }
 
 export async function retrieveProfilePosts() {
-  const { publications, token } = JSON.parse(localStorage.getItem('user'));
+  const { posts, token } = JSON.parse(localStorage.getItem('user'));
+
   try {
     const res = await axios({
       url: `${urlServer}/posts/userPosts`,
@@ -28,7 +29,7 @@ export async function retrieveProfilePosts() {
         'Content-type': 'application/json',
         authorization: token,
       },
-      data: publications,
+      data: posts,
     });
     if (res.status === 400) {
       throw new Error('bad request: could not retrieve publications');
@@ -41,7 +42,7 @@ export async function retrieveProfilePosts() {
   return [];
 }
 
-export async function savePub(newPub) {
+export async function savePost(newPub) {
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   try {

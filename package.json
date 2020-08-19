@@ -4,7 +4,7 @@
   "description": "Boilerplate with MERN Stack + Redux + JWT for registration, login and authentication of users with CRUD operations for users posts.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open",
+    "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "test": "jest --config ./jest.config.json",
     "test:verbose": "jest --verbose --config ./jest.config.json"

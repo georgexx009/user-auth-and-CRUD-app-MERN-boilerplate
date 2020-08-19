@@ -2,6 +2,7 @@ const {
   getAllPostsService,
   getMultiplePostsById,
   createNewPost,
+  updateUserPostsService,
 } = require('../services/posts.service');
 
 const getParamsUsername = (req, res, next, username) => {
@@ -24,11 +25,11 @@ const getAllPosts = async (req, res) => {
 };
 
 const getUserPosts = async (req, res) => {
-  console.log('reach');
   const userPosts = await getMultiplePostsById(req.body);
   // if (userPosts === null) {
   //   res.status(400).send('There was an error while searching for publications');
   if (!userPosts) {
+    console.log('empty');
     res.send([]);
   } else {
     res.send(userPosts);
@@ -44,10 +45,23 @@ const savePost = async (req, res) => {
   }
 };
 
+const updateUserPosts = async (req, res) => {
+  const userUpdated = await updateUserPostsService(
+    req.username,
+    req.body.posts
+  );
+  if (!userUpdated) {
+    res.status(400).send('failed to update posts in user');
+  } else {
+    res.send(userUpdated);
+  }
+};
+
 module.exports = {
   getParamsUsername,
   getParamsPostId,
   getAllPosts,
   getUserPosts,
   savePost,
+  updateUserPosts,
 };

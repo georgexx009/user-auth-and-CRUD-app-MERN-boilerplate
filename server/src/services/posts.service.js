@@ -17,13 +17,12 @@ const getAllPostsService = async () => {
 const getMultiplePostsById = async posts => {
   let postsDoc;
   try {
-    postsFound = await PostModel.find({ _id: posts });
+    postsDoc = await PostModel.find({ _id: posts });
   } catch (err) {
     console.log('An error ocurred retrieving multiple posts:');
     console.log(err.message);
     return null;
   }
-
   return postsDoc;
 };
 
@@ -42,4 +41,25 @@ const createNewPost = async postData => {
   return newPostDoc;
 };
 
-module.exports = { getAllPostsService, getMultiplePostsById, createNewPost };
+const updateUserPostsService = async (username, newPosts) => {
+  let userUpdated;
+  try {
+    userUpdated = UserModel.findOneAndUpdate(
+      { username },
+      { posts: newPosts },
+      { new: true }
+    );
+  } catch (err) {
+    console.log('An error ocurred while creating new post:');
+    console.log(err.message);
+    return null;
+  }
+  return userUpdated;
+};
+
+module.exports = {
+  getAllPostsService,
+  getMultiplePostsById,
+  createNewPost,
+  updateUserPostsService,
+};

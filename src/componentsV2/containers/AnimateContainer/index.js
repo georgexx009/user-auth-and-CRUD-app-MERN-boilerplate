@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import "./index.scss";
+import React, { useState, useEffect } from 'react';
+import './index.scss';
 
-const mountStyle = (setFunc) => {
+const mountStyle = setFunc => {
   setFunc({
     opacity: 1,
-    animation: "slide-up 1s ease",
+    animation: 'slide-up 1s ease',
   });
 };
 
-const unMountStyle = (setFunc) => {
+const unMountStyle = setFunc => {
   setFunc({
     opacity: 0,
-    animation: "slide-down 1s ease",
+    animation: 'slide-down 1s ease',
   });
 };
 
@@ -21,11 +21,11 @@ const animationEnd = (mounted, setShow) => {
   }
 };
 
-const AnimateContainer = (props) => {
+const AnimateContainer = props => {
   const [show, setShow] = useState(false);
   const [style, setStyle] = useState({
     opacity: 0,
-    animation: "slide-up 1s ease",
+    animation: 'slide-up 1s ease',
   });
 
   // //componentDidMount
@@ -35,7 +35,6 @@ const AnimateContainer = (props) => {
 
   //componentWillReceiveProps
   useEffect(() => {
-    console.log("change");
     if (!props.mounted) {
       return unMountStyle(setStyle);
     }

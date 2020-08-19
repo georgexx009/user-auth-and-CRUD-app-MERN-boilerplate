@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { urlServer } from '../../constants';
 
-export async function updateUserPubs(newPubs) {
-  const { token, userName } = JSON.parse(localStorage.getItem('user'));
+export async function updateUserPosts(newPubs) {
+  const { token, username } = JSON.parse(localStorage.getItem('user'));
   console.log(`in service:`);
   console.log(newPubs);
   try {
     const res = await axios({
-      url: `${urlServer}/users/${userName}/updatePubs`,
+      url: `${urlServer}/posts/${username}/updatePosts`,
       method: 'post',
       headers: {
         'Content-type': 'application/json',
