@@ -84,7 +84,6 @@
   #navbar {
     padding: 0;
     margin: 15px 20px;
-    border-radius: 10px;
 
     .sidenav {
       background-color: $surface;
@@ -94,11 +93,21 @@
       position: relative;
       padding: 0;
       box-sizing: border-box;
+      border-radius: 15px;
 
       a {
         color: $onPrimary;
         padding: 15px 30px;
         margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0);
+
+        &:hover {
+          border-bottom: 1px solid white;
+        }
+      }
+
+      .log-off-btn {
+        margin-left: auto;
       }
 
       .username-desktop {

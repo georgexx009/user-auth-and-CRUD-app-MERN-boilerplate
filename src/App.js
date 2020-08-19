@@ -29,9 +29,6 @@ class App extends Component {
             <Route path="/login">
               <LogInV2 />
             </Route>
-            <Route path="/allPublications">
-              <AllPublications />
-            </Route>
             <Route path="/MyPublications">
               <MyPublications />
             </Route>

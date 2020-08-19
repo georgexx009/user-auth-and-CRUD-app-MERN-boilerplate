@@ -8,6 +8,7 @@ div.pub-card {
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
+  border-radius: 10px;
 
   .post-container {
     display: flex;
@@ -23,11 +24,11 @@ div.pub-card {
       padding-left: 20px;
       padding-right: 15px;
       .username {
-        font-size: 0.9em;
+        //font-size: 0.9em;
         margin-bottom: 10px;
       }
       .content {
-        font-size: 0.7em;
+        font-size: 0.8em;
       }
     }
 

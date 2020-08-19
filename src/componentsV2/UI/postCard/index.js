@@ -25,7 +25,9 @@ const PostCard = ({ username, content, id }) => {
       <div className="post-container">
         <div className="avatar"></div>
         <div className="post-content">
-          <p className="username">{username}</p>
+          <h3 className="username">
+            <b>{username}</b>
+          </h3>
           <p className="content">{content}</p>
         </div>
         {loggedUsername === username && (
