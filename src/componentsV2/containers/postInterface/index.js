@@ -7,19 +7,13 @@ import NewPostForm from '../../../componentsV2/containers/newPostForm';
 import AnimateContainer from '../../../componentsV2/containers/AnimateContainer';
 import PostList from '../../../componentsV2/containers/postsList';
 
-import { showPostForm, postSectionVisible } from '../../../actions';
+import { showPostForm } from '../../../actions';
 
 const PostInterface = ({ postsInfo }) => {
   const dispatch = useDispatch();
   // status for display the modal - post form to submit new post
   const statusPostForm = useSelector(state => state.posts.showPostForm);
   const username = useSelector(state => state.userInfo.userName);
-
-  // update redux store bool, for let know other components that we are in posts section
-  useEffect(() => {
-    dispatch(postSectionVisible(true));
-    return () => dispatch(postSectionVisible(false));
-  }, []);
 
   const closeBtnForm = () => {
     dispatch(showPostForm(false));
