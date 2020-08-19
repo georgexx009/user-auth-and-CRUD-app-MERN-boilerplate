@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { retrieveAllPosts } from '../../services';
-import { updateGeneralPosts } from '../../actions';
+import React from 'react';
 import PostInterface from '../../componentsV2/containers/postInterface';
+import { useGetPosts } from '../../hooks';
 
 const AllPublications = () => {
-  const postsInfo = useSelector((state) => state.posts.generalPosts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    retrieveAllPosts().then((data) => {
-      dispatch(updateGeneralPosts(data));
-    });
-  }, []);
+  const { postsList } = useGetPosts('all');
 
   return (
     <>
-      <PostInterface postsInfo={postsInfo} />
+      <PostInterface postsInfo={postsList} />
     </>
   );
 };
