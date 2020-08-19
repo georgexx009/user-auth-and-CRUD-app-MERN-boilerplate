@@ -23,7 +23,7 @@ export function users(state = {}, action) {
       };
     case DELETE_USER_DATA:
       return {
-        userName: 'not logged',
+        username: 'not logged',
       };
     default:
       return state;

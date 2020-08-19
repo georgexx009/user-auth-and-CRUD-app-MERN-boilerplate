@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.scss';
@@ -17,6 +17,11 @@ const Navbar = () => {
 
   // for display username on navbar
   const username = useSelector(state => state.userInfo.username);
+  // const [userLogged, setUserLogged] = useState(false);
+
+  // useEffect(() => {
+  //   if(username !== )
+  // })
 
   // tracking if we are in post section to display btn to show post form
   // when the component appears, it dispatch this bool on redux store
@@ -41,7 +46,7 @@ const Navbar = () => {
           &times;
         </a>
 
-        {username === 'not logged' ? (
+        {username === 'not logged' || username === '' ? (
           <>
             <Link to="/registration">Register</Link>
             <Link to="/login">Log in</Link>
