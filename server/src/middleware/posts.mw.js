@@ -17,7 +17,7 @@ const getParamsPostId = (req, res, next, postId) => {
 const getAllPosts = async (req, res) => {
   const allPosts = await getAllPostsService();
   if (!allPosts) {
-    res.status(400).send('Error ocurred');
+    res.status(400).send('Error ocurred while getting all posts');
   } else {
     res.send(allPosts);
   }
@@ -38,8 +38,7 @@ const getUserPosts = async (req, res) => {
 const savePost = async (req, res) => {
   const newPost = await createNewPost(req.body);
   if (!newPost) {
-    console.error('Failed to save in the database:/');
-    res.status(400).send('Failed to save in the database:/');
+    res.status(400).send('Failed to save in the database');
   } else {
     res.send(newPost);
   }

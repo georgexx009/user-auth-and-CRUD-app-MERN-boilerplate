@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { urlServer } from '../../constants';
 import axios from 'axios';
+import { logError } from './catch.service';
 
 export const userRegistration = async data => {
   const password = data.password;
@@ -9,32 +10,43 @@ export const userRegistration = async data => {
 
   data['password'] = hash;
   data['admin'] = false;
-  const res = await axios({
-    method: 'post',
-    url: `${urlServer}/authentication/register`,
-    data: JSON.stringify(data),
-  });
-  return res;
+  try {
+    const res = await axios({
+      method: 'post',
+      url: `${urlServer}/authentication/register`,
+      data: JSON.stringify(data),
+    });
+    return res;
+  } catch (err) {
+    return logError(err);
+  }
 };
 
 export const usernameValidation = async data => {
-  const res = await fetch(`${urlServer}/authentication/validateUsername`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    const res = await fetch(`${urlServer}/authentication/validateUsername`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-  return res.status;
+    return res.status;
+  } catch (err) {
+    return logError(err);
+  }
 };
 
 export const userLogin = async data => {
-  const res = await axios({
-    method: 'post',
-    url: `${urlServer}/authentication/login`,
-    data: JSON.stringify(data),
-  });
-  console.log(res);
-  return res;
+  try {
+    const res = await axios({
+      method: 'post',
+      url: `${urlServer}/authentication/login`,
+      data: JSON.stringify(data),
+    });
+    return res;
+  } catch (err) {
+    return logError(err);
+  }
 };

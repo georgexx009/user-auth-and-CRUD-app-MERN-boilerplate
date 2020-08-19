@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { urlServer } from '../../constants';
+import { logError } from './catch.service';
 
 export async function retrieveAllPosts() {
   try {
@@ -13,7 +14,7 @@ export async function retrieveAllPosts() {
     }
     return res.data;
   } catch (err) {
-    console.log(`error in retrieve all posts: ${err.message}`);
+    return logError(err);
   }
 }
 
@@ -58,7 +59,7 @@ export async function savePub(newPub) {
     }
     return res.data; //doc created
   } catch (error) {
-    console.log(`error in save new publication: ${error.message}`);
+    return logError(err);
   }
 }
 
@@ -79,6 +80,6 @@ export async function deletePost(postId) {
     }
     return res.status; //RETURN STATUS OR DATA WITHOUT THE ELEMENT
   } catch (err) {
-    console.log(`error in delete post: ${err.message}`);
+    return logError(err);
   }
 }

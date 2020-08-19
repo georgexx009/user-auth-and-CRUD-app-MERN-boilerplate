@@ -13,7 +13,7 @@ const PostInterface = ({ postsInfo }) => {
   const dispatch = useDispatch();
   // status for display the modal - post form to submit new post
   const statusPostForm = useSelector(state => state.posts.showPostForm);
-  const username = useSelector(state => state.userInfo.userName);
+  const username = useSelector(state => state.userInfo.username);
 
   const closeBtnForm = () => {
     dispatch(showPostForm(false));

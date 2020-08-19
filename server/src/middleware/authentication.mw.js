@@ -43,8 +43,8 @@ const validateUsername = async (req, res, next) => {
 const login = async (req, res, next) => {
   const user = await loginUserService(req.body);
 
-  if (!user) {
-    res.sendStatus(404);
+  if (user === null) {
+    res.status(404).send('No user found');
   } else {
     // validate password from database with the one from request
     const correctPassword = await validateUserPassword(
@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
       };
       res.status(200).send(bodyRes);
     } else {
-      res.status(204).send('Failed to find user');
+      res.status(400).send('Incorrect Password');
     }
   }
 };
