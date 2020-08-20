@@ -4,6 +4,7 @@ const {
   createNewPost,
   updateUserPostsService,
   deletePostService,
+  updatePostService,
 } = require('../services/posts.service');
 
 const getParamsUsername = (req, res, next, username) => {
@@ -68,6 +69,10 @@ const deletePost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  const updatedPost = await updatePostService(req.postId);
+};
+
 module.exports = {
   getParamsUsername,
   getParamsPostId,
@@ -76,4 +81,5 @@ module.exports = {
   savePost,
   updateUserPosts,
   deletePost,
+  updatePost,
 };

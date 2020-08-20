@@ -8,6 +8,7 @@ const {
   savePost,
   updateUserPosts,
   deletePost,
+  updatePost,
 } = require('../middleware/posts.mw');
 const auth = require('../utils/auth');
 
@@ -18,5 +19,6 @@ router.post('/userPosts', auth, getUserPosts);
 router.post('/savePost', savePost);
 router.post('/:username/updatePosts', updateUserPosts);
 router.delete('/:postId', deletePost);
+router.put(':postId', updatePost);
 
 module.exports = router;

@@ -68,10 +68,13 @@ const deletePostService = async postId => {
   }
 };
 
+const updatePostService = async (postId, newContent) => {};
+
 module.exports = {
   getAllPostsService,
   getMultiplePostsById,
   createNewPost,
   updateUserPostsService,
   deletePostService,
+  updatePostService,
 };

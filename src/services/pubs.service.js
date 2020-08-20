@@ -77,7 +77,6 @@ export async function deletePost(postId) {
       url: `${urlServer}/posts/${postId}`,
       method: 'delete',
       headers: {
-        'Content-type': 'application/json',
         authorization: token,
       },
     });
