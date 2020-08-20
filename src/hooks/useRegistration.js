@@ -7,7 +7,6 @@ export const useRegistration = (formState, handleSuccess, handleFailure) => {
 
   const onSubmit = async event => {
     event.preventDefault();
-    console.log(formState);
     const registrationRes = await userRegistration(formState);
     if (registrationRes.status === 200) {
       handleSuccess();

@@ -10,6 +10,12 @@ export const useCreatePost = (
   const userData = useSelector(state => state.userInfo);
   const dispatch = useDispatch();
 
+  /*
+    this proccess has two steps
+    create the post, and once the id is provided by mongo
+    it will update the user information adding that new post id
+  */
+
   const createPost = async () => {
     // save post
     const newPost = {
