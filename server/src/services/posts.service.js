@@ -57,9 +57,21 @@ const updateUserPostsService = async (username, newPosts) => {
   return userUpdated;
 };
 
+const deletePostService = async postId => {
+  let deleteResult;
+  try {
+    deleteResult = PostModel.deleteOne({ _id: postId });
+  } catch (err) {
+    console.log('An error ocurred while deleting post:');
+    console.log(err.message);
+    return null;
+  }
+};
+
 module.exports = {
   getAllPostsService,
   getMultiplePostsById,
   createNewPost,
   updateUserPostsService,
+  deletePostService,
 };

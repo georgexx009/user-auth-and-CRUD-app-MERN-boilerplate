@@ -1,24 +1,15 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import './index.scss';
 
-import Button from '../button';
 import IconBtn from '../iconBtn';
 
-import { deletePost } from '../../../services';
-import { removePost } from '../../../actions';
+import { useDeletePost } from './useDeletePost';
 
 const PostCard = ({ username, content, id }) => {
-  const dispatch = useDispatch();
   const loggedUsername = useSelector(state => state.userInfo.username);
 
-  const handleDeleteClick = () => {
-    deletePost(id).then(status => {
-      if (status === 200 || status == 204) {
-        dispatch(removePost(id));
-      }
-    });
-  };
+  const { handleDeletePost } = useDeletePost(id);
 
   return (
     <div className="pub-card">
@@ -38,7 +29,7 @@ const PostCard = ({ username, content, id }) => {
                 style={{ color: 'grey', cursor: 'not-allowed' }}
               ></i>
             </IconBtn>
-            <IconBtn handleClick={handleDeleteClick}>
+            <IconBtn handleClick={handleDeletePost}>
               <i className="fas fa-trash"></i>
             </IconBtn>
           </div>

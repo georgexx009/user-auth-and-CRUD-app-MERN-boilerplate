@@ -3,6 +3,7 @@ const {
   getMultiplePostsById,
   createNewPost,
   updateUserPostsService,
+  deletePostService,
 } = require('../services/posts.service');
 
 const getParamsUsername = (req, res, next, username) => {
@@ -57,6 +58,16 @@ const updateUserPosts = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  const deleteResult = await deletePostService(req.postId);
+  console.log(deleteResult);
+  if (!deleteResult.ok) {
+    res.status(400).send('failed to delete post');
+  } else {
+    res.sendStatus(200);
+  }
+};
+
 module.exports = {
   getParamsUsername,
   getParamsPostId,
@@ -64,4 +75,5 @@ module.exports = {
   getUserPosts,
   savePost,
   updateUserPosts,
+  deletePost,
 };
