@@ -5,7 +5,7 @@ import './index.scss';
 import FloatingBtn from '../../UI/floatingBtn/index2';
 import NewPostForm from '../NewPostForm';
 import AnimateContainer from '../AnimateContainer';
-import PostList from '../postsList';
+import PostList from '../PostsList';
 
 import { showPostForm } from '../../../actions';
 

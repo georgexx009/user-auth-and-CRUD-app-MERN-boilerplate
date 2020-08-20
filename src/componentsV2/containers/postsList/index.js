@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './index.scss';
 import PostCard from '../../UI/postCard';
 

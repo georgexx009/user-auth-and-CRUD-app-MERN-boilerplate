@@ -22,7 +22,7 @@ const registerNewUserService = async newUserData => {
     console.log(err.message);
     return null;
   }
-  return newUserData;
+  return newUserDoc;
 };
 
 const validateUsernameService = async username => {

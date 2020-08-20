@@ -10,7 +10,7 @@ import { removePost } from '../../../actions';
 
 const PostCard = ({ username, content, id }) => {
   const dispatch = useDispatch();
-  const loggedUsername = useSelector(state => state.userInfo.userName);
+  const loggedUsername = useSelector(state => state.userInfo.username);
 
   const handleDeleteClick = () => {
     deletePost(id).then(status => {
