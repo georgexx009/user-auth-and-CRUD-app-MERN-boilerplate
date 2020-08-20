@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 // setting post schema
 const PostSchema = new Schema({
   username: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
+    ref: 'UserV2',
   },
   content: {
     type: String,

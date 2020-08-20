@@ -18,6 +18,7 @@ const generateAuthToken = require('../utils/generateAuthToken');
 
 const register = async (req, res, next) => {
   const newUser = await registerNewUserService(req.body);
+  console.log(newUser);
   if (!newUser) {
     res.sendStatus(400);
   } else {

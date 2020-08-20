@@ -28,9 +28,12 @@ const UserSchema = new Schema({
     trim: true,
   },
   // manage each user post
-  posts: {
-    type: Array,
-  },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'posts',
+    },
+  ],
 });
 
 // create user model
