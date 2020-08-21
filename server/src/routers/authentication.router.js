@@ -6,7 +6,7 @@ const {
   register,
   validateUsername,
   login,
-} = require('../middleware/authentication.mw');
+} = require('../middleware/authentication');
 
 // endpoints
 router.post('/register', register);
