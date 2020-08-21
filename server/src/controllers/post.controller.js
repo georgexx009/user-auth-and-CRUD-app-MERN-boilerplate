@@ -23,6 +23,18 @@ module.exports = {
     await user.save();
     res.send(user);
   },
+  getAll: async () => {
+    let allPostsDoc;
+    try {
+      allPostsDoc = await PostModel.find();
+    } catch (err) {
+      console.log('An error ocurred while retrieving all posts --');
+      console.log(err.message);
+      return null;
+    }
+
+    return allPostsDoc;
+  },
   userByPost: async (req, res) => {
     const { id } = req.params;
     const userByPost = await PostModel.findById(id).populate('username');

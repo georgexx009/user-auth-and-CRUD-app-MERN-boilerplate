@@ -46,9 +46,10 @@ module.exports = {
 
     return userDoc;
   },
-  postsByUser: async (req, res) => {
-    const { id } = req.params;
-    const userPostsDoc = await UserModel.find({ _id: id }).populate('posts');
-    res.send(userPostsDoc);
+  postsByUserId: async username => {
+    const userPostsDoc = await UserModel.findOne({ username }).populate(
+      'posts'
+    );
+    return userPostsDoc;
   },
 };
