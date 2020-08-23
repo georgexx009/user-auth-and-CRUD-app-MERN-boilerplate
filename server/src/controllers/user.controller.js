@@ -52,4 +52,17 @@ module.exports = {
     );
     return userPostsDoc;
   },
+  updateUser: async (userId, newUserData) => {
+    let updatedUserDoc;
+    try {
+      updatedUserDoc = await UserModel.findByIdAndUpdate(userId, newUserData, {
+        new: true,
+      });
+    } catch (err) {
+      console.log('An error ocurred while updating user data --');
+      console.log(err.message);
+      return null;
+    }
+    return updatedUserDoc;
+  },
 };
