@@ -21,7 +21,7 @@ module.exports = {
   getAll: async () => {
     let allPostsDoc;
     try {
-      allPostsDoc = await PostModel.find();
+      allPostsDoc = await PostModel.find().populate('userId');
     } catch (err) {
       console.log('An error ocurred while retrieving all posts --');
       console.log(err.message);
