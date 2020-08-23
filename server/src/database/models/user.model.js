@@ -31,12 +31,12 @@ const UserSchema = new Schema({
   posts: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'posts',
+      ref: 'Posts',
     },
   ],
 });
 
 // create user model
-const userModel = mongoose.model('UserV2', UserSchema);
+const userModel = mongoose.model('Users', UserSchema);
 
 module.exports = userModel;

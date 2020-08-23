@@ -7,15 +7,6 @@ const {
   updatePostService,
 } = require('../services/posts.service');
 
-const savePost = async (req, res) => {
-  const newPost = await createNewPost(req.body);
-  if (!newPost) {
-    res.status(400).send('Failed to save in the database');
-  } else {
-    res.send(newPost);
-  }
-};
-
 const updateUserPosts = async (req, res) => {
   const userUpdated = await updateUserPostsService(
     req.username,

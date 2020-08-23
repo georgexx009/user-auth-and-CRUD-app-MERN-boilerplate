@@ -7,21 +7,16 @@ const UserModel = require('../database/models/user.model');
 const PostModel = require('../database/models/post.model');
 
 module.exports = {
-  create: async (req, res) => {
-    const userId = req.params.id;
-    const { content } = req.body;
+  create: async (username, content) => {
+    const user = await UserModel.findOne({ username });
     const postDoc = await PostModel.create({
-      username: userId,
+      userId: user._id,
       content,
     });
 
-    //await postDoc.save();
-
-    const user = await UserModel.findById(userId);
-    console.log(user);
     user.posts.push(postDoc);
     await user.save();
-    res.send(user);
+    return user;
   },
   getAll: async () => {
     let allPostsDoc;

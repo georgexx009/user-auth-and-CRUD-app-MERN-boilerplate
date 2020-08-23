@@ -3,6 +3,7 @@ const makeResponse = require('./utils/makeResponse');
 const userController = require('../../controllers/user.controller');
 
 module.exports = async (req, res) => {
+  console.log(req.body);
   let newUserDoc = await userController.create(req.body);
 
   // handle error

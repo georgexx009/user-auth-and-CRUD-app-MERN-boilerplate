@@ -4,9 +4,9 @@ module.exports = {
   create: async userData => {
     let newUserDoc;
     try {
-      newUserDoc = UserModel.create(userData);
+      newUserDoc = await UserModel.create(userData);
     } catch (err) {
-      console.log('An error ocurred while retrieving all users --');
+      console.log('An error ocurred while registering a user --');
       console.log(err.message);
       return null;
     }
@@ -46,7 +46,7 @@ module.exports = {
 
     return userDoc;
   },
-  postsByUserId: async username => {
+  postsByUsername: async username => {
     const userPostsDoc = await UserModel.findOne({ username }).populate(
       'posts'
     );

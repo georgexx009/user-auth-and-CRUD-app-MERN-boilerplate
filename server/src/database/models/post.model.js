@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 // setting post schema
 const PostSchema = new Schema({
-  username: {
+  userId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'UserV2',
+    ref: 'Users',
   },
   content: {
     type: String,
@@ -15,6 +15,6 @@ const PostSchema = new Schema({
 });
 
 // create post model
-const postModel = mongoose.model('posts', PostSchema);
+const postModel = mongoose.model('Posts', PostSchema);
 
 module.exports = postModel;
