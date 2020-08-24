@@ -3,4 +3,5 @@ module.exports = {
   getAllPosts: require('./getAllPosts.mw'),
   getUserPosts: require('./getUserPosts.mw'),
   createNewPost: require('./createNewPost.mw'),
+  updatePost: require('./updatePost.mw'),
 };

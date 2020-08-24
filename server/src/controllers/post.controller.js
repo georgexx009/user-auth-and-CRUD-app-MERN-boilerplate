@@ -30,9 +30,17 @@ module.exports = {
 
     return allPostsDoc;
   },
-  userByPost: async (req, res) => {
-    const { id } = req.params;
-    const userByPost = await PostModel.findById(id).populate('username');
-    res.send(userByPost);
+  update: async (postId, newData) => {
+    let updatedPostDoc;
+    try {
+      updatedPostDoc = await PostModel.findByIdAndUpdate(postId, newData, {
+        new: true,
+      });
+    } catch (err) {
+      console.log('An error ocurred while updating a post --');
+      console.log(err.message);
+      return null;
+    }
+    return updatedPostDoc;
   },
 };
