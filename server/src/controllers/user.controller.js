@@ -65,4 +65,16 @@ module.exports = {
     }
     return updatedUserDoc;
   },
+  deleteUser: async userId => {
+    let statusDelete;
+    try {
+      statusDelete = await UserModel.findByIdAndRemove(userId);
+    } catch (err) {
+      console.log('An error ocurred while deleting user --');
+      console.log(err.message);
+      return null;
+    }
+    console.log(statusDelete);
+    return statusDelete;
+  },
 };
