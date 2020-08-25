@@ -16,7 +16,7 @@ module.exports = {
 
     user.posts.push(postDoc);
     await user.save();
-    return user;
+    return postDoc;
   },
   getAll: async () => {
     let allPostsDoc;

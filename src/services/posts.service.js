@@ -60,7 +60,10 @@ export async function savePost(newPub) {
     }
     return {
       status: res.status,
-      postDoc: res.data,
+      postDoc: {
+        username,
+        content: res.data.content,
+      },
     };
   } catch (error) {
     return logError(err);

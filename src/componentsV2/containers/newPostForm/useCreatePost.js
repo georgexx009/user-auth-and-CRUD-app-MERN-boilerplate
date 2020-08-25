@@ -22,7 +22,7 @@ export const useCreatePost = (
       content: formState.content,
     };
     const { status, postDoc } = await savePost(newPost);
-    console.log(postDoc);
+
     if (status === 200) {
       // dispatch(setUserPubs(data.posts));
       dispatch(addNewPost(postDoc));
