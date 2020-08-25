@@ -43,4 +43,15 @@ module.exports = {
     }
     return updatedPostDoc;
   },
+  delete: async postId => {
+    let deletedPostDoc;
+    try {
+      deletedPostDoc = await PostModel.findByIdAndDelete(postId);
+    } catch (err) {
+      console.log('An error ocurred while updating a post --');
+      console.log(err.message);
+      return null;
+    }
+    return deletedPostDoc;
+  },
 };

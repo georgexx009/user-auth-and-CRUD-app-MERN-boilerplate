@@ -5,8 +5,7 @@ const {
   getUserPosts,
   createNewPost,
   updatePost,
-  // deletePost,
-  // updatePost,
+  deletePost,
   getParams,
 } = require('../middleware/posts');
 const auth = require('../utils/auth');
@@ -20,7 +19,6 @@ router.get('/', getAllPosts);
 router.get('/:username', getUserPosts); // postsByUsername - get the posts from a user
 router.post('/create/:username', createNewPost); // create a post with ref to a user
 router.put('/:postId', updatePost);
-// router.delete('/:postId', deletePost);
-//router.put(':postId', updatePost);
+router.delete('/:postId', deletePost);
 
 module.exports = router;
