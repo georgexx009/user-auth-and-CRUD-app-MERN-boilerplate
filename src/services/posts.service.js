@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { urlServer } from '../../constants';
 import { logError } from './catch.service';
+import { formatAllPosts, formatUserPosts } from '../helpers/formatPosts';
 
 export async function retrieveAllPosts() {
   try {
@@ -12,29 +13,28 @@ export async function retrieveAllPosts() {
     if (res.status === 400) {
       throw new Error('bad request: could not retrieve all posts');
     }
-    return res.data;
+    return formatAllPosts(res.data);
   } catch (err) {
     return logError(err);
   }
 }
 
 export async function retrieveProfilePosts() {
-  const { posts, token } = JSON.parse(localStorage.getItem('user'));
+  const { username, token } = JSON.parse(localStorage.getItem('user'));
 
   try {
     const res = await axios({
-      url: `${urlServer}/posts/userPosts`,
-      method: 'post',
+      url: `${urlServer}/posts/${username}`,
+      method: 'get',
       headers: {
         'Content-type': 'application/json',
         authorization: token,
       },
-      data: posts,
     });
     if (res.status === 400) {
       throw new Error('bad request: could not retrieve publications');
     }
-    return res.data;
+    return formatUserPosts(res.data);
   } catch (err) {
     console.error(`error in retrieve publications: ${err.message}`);
   }
@@ -43,11 +43,11 @@ export async function retrieveProfilePosts() {
 }
 
 export async function savePost(newPub) {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-
+  const { username, token } = JSON.parse(localStorage.getItem('user'));
+  console.log(username);
   try {
     const res = await axios({
-      url: `${urlServer}/posts/savePost`,
+      url: `${urlServer}/posts/create/${username}`,
       method: 'post',
       headers: {
         'Content-type': 'application/json',

@@ -13,10 +13,10 @@ export const useValidateUsername = (
       username: value,
     };
     const isUsernameTaken = await usernameValidation(data);
-    if (isUsernameTaken === 200) {
+    if (isUsernameTaken === 204) {
       handleUsernameAvailable();
       setStatusUsernameAvailable(true);
-    } else {
+    } else if (isUsernameTaken === 200) {
       handleUsernameTaken();
       setStatusUsernameAvailable(false);
     }

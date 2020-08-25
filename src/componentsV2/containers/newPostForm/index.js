@@ -7,7 +7,7 @@ import { useStateForm } from '../../../hooks';
 import { useCreatePost } from './useCreatePost';
 
 const NewPostForm = () => {
-  const { formState, onChange, resetForm } = useStateForm({ post: '' });
+  const { formState, onChange, resetForm } = useStateForm({ content: '' });
 
   // close form from inside form
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const NewPostForm = () => {
 
   return (
     <div className="new-pub-form">
-      <textarea placeholder="post ..." name="post" onChange={onChange} />
+      <textarea placeholder="post ..." name="content" onChange={onChange} />
       <div className="footer-btns">
         <Button
           lbl="Close"
@@ -33,7 +33,7 @@ const NewPostForm = () => {
         <Button
           lbl="Save"
           handleClick={createPost}
-          disabled={formState.post.trim() === ''}
+          disabled={formState.content.trim() === ''}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ module.exports = userData => {
   // we should copy the information to another element
   return {
     user: {
-      id: _id,
+      _id,
       firstName,
       lastName,
       username,

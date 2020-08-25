@@ -1,19 +1,17 @@
 const userController = require('../../controllers/user.controller');
 
 module.exports = async (req, res) => {
+  console.log(req.body);
   const usernameAvailable = await userController.findByUsername(
     req.body.username
   );
+  console.log(usernameAvailable);
 
-  // handle error
-  if (usernameAvailable === null) {
-    res.status(400).send('an error ocurred while validating username');
-  } // ----------------------------------------
-  else if (usernameAvailable) {
-    // username already took
-    res.sendStatus(200);
-  } else {
+  if (!usernameAvailable) {
     // username available
     res.sendStatus(204);
+  } else {
+    // username already took
+    res.sendStatus(200);
   }
 };
