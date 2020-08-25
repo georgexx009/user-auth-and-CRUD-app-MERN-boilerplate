@@ -58,7 +58,10 @@ export async function savePost(newPub) {
     if (res.status === 400) {
       throw new Error('bad request: could not save new publication');
     }
-    return res.data; //doc created
+    return {
+      status: res.status,
+      postDoc: res.data,
+    };
   } catch (error) {
     return logError(err);
   }
