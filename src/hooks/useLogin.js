@@ -1,8 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { userLogin } from '../services';
+// import { userLogin } from '../services';
+import authenticationSvc from '../services/authentication';
 import { setUserData } from '../actions';
 
 export const useLogin = (formState, handleSuccess, handleFailure) => {
+  const { userLogin } = authenticationSvc;
   const dispatch = useDispatch();
 
   const onSubmit = async event => {

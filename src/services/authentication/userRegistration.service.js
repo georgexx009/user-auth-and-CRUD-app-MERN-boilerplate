@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import axios from 'axios';
+import { logError } from '../catch.service';
 
 export const userRegistration = async data => {
   const password = data.password;
@@ -11,7 +12,7 @@ export const userRegistration = async data => {
   try {
     const res = await axios({
       method: 'post',
-      url: `${urlServer}/authentication/register`,
+      url: `${process.env.API_URL}/authentication/register`,
       data: JSON.stringify(data),
     });
     return res;

@@ -1,5 +1,9 @@
-import {} from './userLogin.service';
+import { userLogin } from './userLogin.service';
+import { usernameValidation } from './usernameValidation.service';
+import { userRegistration } from './userRegistration.service';
 
 export default {
-  userLogin: {},
+  userRegistration,
+  usernameValidation,
+  userLogin,
 };

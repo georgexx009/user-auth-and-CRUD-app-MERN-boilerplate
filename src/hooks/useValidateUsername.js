@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { usernameValidation } from '../services';
+import authenticationSvc from '../services/authentication';
 
 export const useValidateUsername = (
   handleUsernameAvailable,
   handleUsernameTaken
 ) => {
+  const { usernameValidation } = authenticationSvc;
   const [statusUsernameAvailable, setStatusUsernameAvailable] = useState();
 
   const handleValidateUsername = async e => {
