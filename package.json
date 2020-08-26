@@ -4,8 +4,8 @@
   "description": "Boilerplate with MERN Stack + Redux + JWT for registration, login and authentication of users with CRUD operations for users posts.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --env.ENVIRONMENT=development --mode development",
+    "build": "webpack --env.ENVIRONMENT=production --mode production",
     "test": "jest --config ./jest.config.json",
     "test:verbose": "jest --verbose --config ./jest.config.json",
     "preinstall": "npx npm-force-resolutions"
@@ -36,6 +36,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "file-loader": "^6.0.0",
