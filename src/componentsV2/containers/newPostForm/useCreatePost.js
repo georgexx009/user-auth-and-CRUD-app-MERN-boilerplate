@@ -1,13 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { savePost, updateUserPosts } from '../../../services';
-import { setUserPubs, addNewPost } from '../../../actions';
+import { useDispatch } from 'react-redux';
+import postsSvcs from '../../../services/posts';
+import { addNewPost } from '../../../actions';
 
 export const useCreatePost = (
   formState,
   handleSuccess = () => {},
   handleFailure = () => {}
 ) => {
-  const userData = useSelector(state => state.userInfo);
+  const { savePost } = postsSvcs;
   const dispatch = useDispatch();
 
   /*
@@ -24,7 +24,6 @@ export const useCreatePost = (
     const { status, postDoc } = await savePost(newPost);
 
     if (status === 200) {
-      // dispatch(setUserPubs(data.posts));
       dispatch(addNewPost(postDoc));
       handleSuccess();
     } else {

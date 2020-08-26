@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { retrieveProfilePosts, retrieveAllPosts } from '../services';
+import postsSvcs from '../services/posts';
 import {
   updateProfilePosts,
   updateGeneralPosts,
@@ -16,12 +16,12 @@ import {
 const options = {
   user: {
     stateName: 'profilePosts',
-    service: retrieveProfilePosts,
+    service: postsSvcs.retrieveUserPosts,
     actionCreator: updateProfilePosts,
   },
   all: {
     stateName: 'generalPosts',
-    service: retrieveAllPosts,
+    service: postsSvcs.retrieveAllPosts,
     actionCreator: updateGeneralPosts,
   },
 };

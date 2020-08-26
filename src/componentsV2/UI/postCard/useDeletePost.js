@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../services';
+import postsSvcs from '../../../services/posts';
 import { removePost } from '../../../actions';
 
 export const useDeletePost = postId => {
+  const { deletePost } = postsSvcs;
   const dispatch = useDispatch();
 
   const handleDeletePost = async () => {
