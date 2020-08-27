@@ -33,10 +33,20 @@ export function postsReducer(state = {}, action) {
         ...state,
         showPostForm: action.payload.status,
       };
+    case postsConstants.SET_POST_FORM:
+      return {
+        ...state,
+        postFormData: action.payload,
+      };
     case postsConstants.POST_SECTION_VISIBLE:
       return {
         ...state,
         postSectionVisible: action.payload.status,
+      };
+    case postsConstants.SET_NEW_POSTS_AVAILABLE:
+      return {
+        ...state,
+        newPostsAvailable: action.payload.status,
       };
     default:
       return state;

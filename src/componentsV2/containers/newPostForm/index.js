@@ -1,29 +1,42 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './index.scss';
 import Button from '../../UI/button';
-import { showPostForm } from '../../../actions';
+import { showPostForm, setPostForm } from '../../../actions';
 import { useStateForm } from '../../../hooks';
 import { useCreatePost } from './useCreatePost';
 
-const NewPostForm = () => {
-  const { formState, onChange, resetForm } = useStateForm({ content: '' });
+const NewPostForm = ({ type, postData = { id: '', content: '' } }) => {
+  const { formState, onChange, resetForm } = useStateForm({
+    content: postData.content,
+  });
 
   // close form from inside form
   const dispatch = useDispatch();
   const handleCloseBtn = () => {
-    dispatch(showPostForm(false));
+    dispatch(setPostForm(false));
   };
 
-  // hook for create post
-  const { createPost } = useCreatePost(formState, () => {
-    resetForm();
-    handleCloseBtn();
-  });
+  // hook for save post (new or updated)
+  const { savePost } = useCreatePost(
+    type,
+    formState,
+    () => {
+      resetForm();
+      handleCloseBtn();
+    },
+    () => {},
+    postData.id
+  );
 
   return (
     <div className="new-pub-form">
-      <textarea placeholder="post ..." name="content" onChange={onChange} />
+      <textarea
+        placeholder="post ..."
+        name="content"
+        onChange={onChange}
+        value={formState.content}
+      />
       <div className="footer-btns">
         <Button
           lbl="Close"
@@ -32,7 +45,7 @@ const NewPostForm = () => {
         />
         <Button
           lbl="Save"
-          handleClick={createPost}
+          handleClick={savePost}
           disabled={formState.content.trim() === ''}
         />
       </div>

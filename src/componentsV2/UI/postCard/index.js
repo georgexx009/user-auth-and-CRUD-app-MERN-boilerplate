@@ -5,11 +5,13 @@ import './index.scss';
 import IconBtn from '../iconBtn';
 
 import { useDeletePost } from './useDeletePost';
+import { useEditPost } from './useEditPost';
 
 const PostCard = ({ username, content, id }) => {
   const loggedUsername = useSelector(state => state.userInfo.username);
 
   const { handleDeletePost } = useDeletePost(id);
+  const { handleEditPost } = useEditPost(id, content);
 
   return (
     <div className="pub-card">
@@ -23,11 +25,8 @@ const PostCard = ({ username, content, id }) => {
         </div>
         {loggedUsername === username && (
           <div className="grp-options">
-            <IconBtn>
-              <i
-                className="far fa-edit"
-                style={{ color: 'grey', cursor: 'not-allowed' }}
-              ></i>
+            <IconBtn handleClick={handleEditPost}>
+              <i className="far fa-edit"></i>
             </IconBtn>
             <IconBtn handleClick={handleDeletePost}>
               <i className="fas fa-trash"></i>

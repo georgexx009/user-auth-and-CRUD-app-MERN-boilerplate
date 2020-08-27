@@ -5,6 +5,7 @@ import {
   updateProfilePosts,
   updateGeneralPosts,
   postSectionVisible,
+  setNewPostsAvailable,
 } from '../actions';
 
 /*
@@ -30,6 +31,7 @@ export const useGetPosts = option => {
   const optionChoosed = options[option] || options.all;
 
   const postsList = useSelector(state => state.posts[optionChoosed.stateName]);
+  const newPostsAvailable = useSelector(state => state.posts.newPostsAvailable);
   const dispatch = useDispatch();
 
   // update redux store bool, for let know other components that we are in posts section
@@ -37,9 +39,10 @@ export const useGetPosts = option => {
     optionChoosed.service().then(posts => {
       dispatch(optionChoosed.actionCreator(posts));
     });
+    dispatch(setNewPostsAvailable(false));
     dispatch(postSectionVisible(true));
     return () => dispatch(postSectionVisible(false));
-  }, []);
+  }, [newPostsAvailable]);
 
   return { postsList };
 };

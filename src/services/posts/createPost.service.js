@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { logError } from '../catch.service';
 
-export async function savePost(newPub) {
+export async function createPost(newPub) {
   const { username, token } = JSON.parse(localStorage.getItem('user'));
-  console.log(username);
+
   try {
     const res = await axios({
       url: `${process.env.API_URL}/posts/create/${username}`,

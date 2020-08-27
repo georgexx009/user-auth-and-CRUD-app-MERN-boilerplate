@@ -37,9 +37,33 @@ export function showPostForm(status) {
   };
 }
 
+export function setPostForm(
+  status = false,
+  type = 'create',
+  postData = { id: '', content: '' }
+) {
+  return {
+    type: postsConstants.SET_POST_FORM,
+    payload: {
+      status,
+      type,
+      postData,
+    },
+  };
+}
+
 export function postSectionVisible(status) {
   return {
     type: postsConstants.POST_SECTION_VISIBLE,
+    payload: {
+      status,
+    },
+  };
+}
+
+export function setNewPostsAvailable(status) {
+  return {
+    type: postsConstants.SET_NEW_POSTS_AVAILABLE,
     payload: {
       status,
     },

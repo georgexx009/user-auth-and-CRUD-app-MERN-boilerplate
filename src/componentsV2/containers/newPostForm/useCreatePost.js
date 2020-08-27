@@ -1,13 +1,15 @@
 import { useDispatch } from 'react-redux';
 import postsSvcs from '../../../services/posts';
-import { addNewPost } from '../../../actions';
+import { setNewPostsAvailable } from '../../../actions';
 
 export const useCreatePost = (
+  type = 'create',
   formState,
   handleSuccess = () => {},
-  handleFailure = () => {}
+  handleFailure = () => {},
+  postId
 ) => {
-  const { savePost } = postsSvcs;
+  const { createPost, editPost } = postsSvcs;
   const dispatch = useDispatch();
 
   /*
@@ -16,20 +18,25 @@ export const useCreatePost = (
     it will update the user information adding that new post id
   */
 
-  const createPost = async () => {
+  const savePost = async () => {
     // save post
     const newPost = {
       content: formState.content,
     };
-    const { status, postDoc } = await savePost(newPost);
+
+    const { status, postDoc } =
+      type === 'edit'
+        ? await editPost(postId, newPost)
+        : await createPost(newPost);
 
     if (status === 200) {
-      dispatch(addNewPost(postDoc));
+      //dispatch(addNewPost(postDoc));
+      dispatch(setNewPostsAvailable(true));
       handleSuccess();
     } else {
       handleFailure();
     }
   };
 
-  return { createPost };
+  return { savePost };
 };

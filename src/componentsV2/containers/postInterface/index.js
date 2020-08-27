@@ -7,14 +7,14 @@ import NewPostForm from '../NewPostForm';
 import AnimateContainer from '../AnimateContainer';
 import PostList from '../PostsList';
 
-import { showPostForm } from '../../../actions';
+import { showPostForm, setPostForm } from '../../../actions';
 
 const PostInterface = ({ postsList }) => {
   const dispatch = useDispatch();
 
   // status for display the modal - post form to submit new post
   // its on store because could be display from btn on navbar (btn display on mobile screen)
-  const statusPostForm = useSelector(state => state.posts.showPostForm);
+  const postFormData = useSelector(state => state.posts.postFormData);
 
   // if user not log, it wont display btn to show post form
   const username = useSelector(state => state.userInfo.username);
@@ -22,8 +22,11 @@ const PostInterface = ({ postsList }) => {
   return (
     <>
       <div className="posts-interface">
-        <AnimateContainer mounted={statusPostForm}>
-          <NewPostForm />
+        <AnimateContainer mounted={postFormData.status}>
+          <NewPostForm
+            type={postFormData.type}
+            postData={postFormData.postData}
+          />
         </AnimateContainer>
         {postsList.length === 0 ? (
           <p>No posts available</p>
@@ -34,7 +37,7 @@ const PostInterface = ({ postsList }) => {
       {username !== 'not logged' && (
         <FloatingBtn
           onClick={() => {
-            dispatch(showPostForm(!statusPostForm));
+            dispatch(setPostForm(!postFormData.status));
           }}
         />
       )}

@@ -6,7 +6,7 @@ export async function editPost(postId, newPostContent) {
 
   try {
     const res = await axios({
-      url: `${urlServer}/posts/${postId}`,
+      url: `${process.env.API_URL}/posts/${postId}`,
       method: 'put',
       headers: {
         'Content-type': 'application/json',
@@ -14,11 +14,19 @@ export async function editPost(postId, newPostContent) {
       },
       data: newPostContent,
     });
+
     if (res.status === 400) {
       throw new Error('the request was not successful');
     }
-    return res;
+
+    return {
+      status: res.status,
+      postDoc: {
+        content: res.data.content,
+      },
+    };
   } catch (err) {
-    return logError(err);
+    //return logError(err);
+    console.log('error');
   }
 }

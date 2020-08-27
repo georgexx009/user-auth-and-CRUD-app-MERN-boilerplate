@@ -42,6 +42,12 @@ export const initialState = {
     generalPosts: [],
     profilePosts: [],
     showPostForm: false,
+    newPostsAvailable: false,
+    postFormData: {
+      type: 'create',
+      status: false,
+      postData: { id: '', content: '' },
+    },
     postSectionVisible: false,
   },
 };
