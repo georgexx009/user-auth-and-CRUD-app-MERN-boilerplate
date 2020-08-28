@@ -2,4 +2,3 @@
 /server/node_modules
 /server/.env
 .env
-.env.development
