@@ -16,7 +16,7 @@ router.param('postId', getParams.getParamsPostId);
 router.get('/', getAllPosts);
 router.get('/:username', getUserPosts); // postsByUsername - get the posts from a user
 router.post('/create/:username', auth, createNewPost); // create a post with ref to a user
-router.put('/:postId', updatePost);
-router.delete('/:postId', deletePost);
+router.put('/:postId', auth, updatePost);
+router.delete('/:postId', auth, deletePost);
 
 module.exports = router;
