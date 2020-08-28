@@ -2,7 +2,18 @@ import { useDispatch } from 'react-redux';
 import postsSvcs from '../../../services/posts';
 import { setNewPostsAvailable } from '../../../actions';
 
-export const useCreatePost = (
+/*
+  To avoid creating two hooks for create and update a post
+  this hook could makes both, since the behaviour is similar
+*/
+
+/*
+  by default the type is for create a new post
+  we dont need to worry about setting a default value on postId
+  because the parent component already do it
+*/
+
+export const useSavePost = (
   type = 'create',
   formState,
   handleSuccess = () => {},
@@ -12,25 +23,19 @@ export const useCreatePost = (
   const { createPost, editPost } = postsSvcs;
   const dispatch = useDispatch();
 
-  /*
-    this proccess has two steps
-    create the post, and once the id is provided by mongo
-    it will update the user information adding that new post id
-  */
-
+  // function returned to trigger save post behavior
   const savePost = async () => {
     // save post
     const newPost = {
       content: formState.content,
     };
 
-    const { status, postDoc } =
+    const { status } =
       type === 'edit'
         ? await editPost(postId, newPost)
         : await createPost(newPost);
 
     if (status === 200) {
-      //dispatch(addNewPost(postDoc));
       dispatch(setNewPostsAvailable(true));
       handleSuccess();
     } else {

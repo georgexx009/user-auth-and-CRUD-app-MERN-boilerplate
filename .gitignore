@@ -2,3 +2,4 @@
 /server/node_modules
 /server/.env
 .env
+/dist
